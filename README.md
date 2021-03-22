@@ -20,7 +20,7 @@ webpack4 于 2018 年 2 月发布，webpack5 于 2020 年 10 月发布。两年�
 npm i webpack@4.x webpack-cli@3.x webpack-dev-server@3.x html-webpack-plugin@4.x webpack-merge@5.x clean-webpack-plugin@3.x -D
 ```
 
-# 新建 webpack 相关文件
+## 新建 webpack 相关文件
 
 - 可以创建一个`webpack.config.js`文件，当然也可以创建一个文件夹 webpack，里面根据不同环境建多个文件如：`webpack.dev.js、webpack.prod.js`等。
 
@@ -212,7 +212,7 @@ module.exports = merge(config, {
 });
 ```
 
-# 因为是 typescript+react 项目
+## 因为是 typescript+react 项目
 
 这里使用`ts-loader`来加载`.tsx和.ts`文件
 
@@ -232,7 +232,7 @@ npm i react@17.x react-dom@17.x -S
 npm i ts-loader@8.x fork-ts-checker-webpack-plugin@6.x -D
 ```
 
-## webpack.common.js
+### webpack.common.js
 
 ```javascript
 module.exports = {
@@ -256,7 +256,7 @@ module.exports = {
 };
 ```
 
-## webpack.dev.js
+### webpack.dev.js
 
 ```javascript
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
@@ -274,7 +274,7 @@ module.exports = merge(config, {
 });
 ```
 
-# js 的兼容性
+## js 的兼容性
 
 使用`babel-loader`处理 js 兼容性，需要安装相关 babel 工具链
 
@@ -298,7 +298,7 @@ npm i @babel/runtime@7.x -S
 
 - [babel-plugin-import：实现按需加载，主要用于 antd，antd-mobile，lodash，material-ui 库实现按需加载](https://github.com/ant-design/babel-plugin-import)
 
-## webpack.common.js
+### webpack.common.js
 
 ```javascript
 module.exports = {
@@ -411,9 +411,9 @@ module.exports = {
 };
 ```
 
-# 处理样式
+## 处理样式
 
-## loaders
+### loaders
 
 - [css-loader](https://v4.webpack.docschina.org/loaders/css-loader/)
   - [css modules](https://github.com/css-modules/css-modules)
@@ -432,7 +432,7 @@ module.exports = {
 npm i postcss-loader@4.x postcss-preset-env@6.x css-loader@5.x less-loader@7.x less@4.x sass-loader@10.x sass@1.x style-loader@2.x mini-css-extract-plugin@1.x -D
 ```
 
-## 为了便于公用 loader，我们将公用的 loaders 写成如下：
+### 为了便于公用 loader，我们将公用的 loaders 写成如下：
 
 ```javascript
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -541,7 +541,7 @@ const styleLoaders = [
 ];
 ```
 
-## webpack.common.js
+### webpack.common.js
 
 ```javascript
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -613,7 +613,7 @@ module.exports = {
 };
 ```
 
-# 压缩、优化
+## 压缩、优化
 
 开发模式下不需要进行压缩优化，只需在生产模式下进行。
 
@@ -621,7 +621,7 @@ module.exports = {
 npm i terser-webpack-plugin@4.x css-minimizer-webpack-plugin@1.x -D
 ```
 
-## webpack.pro.js
+### webpack.pro.js
 
 ```javascript
 const TerserPlugin = require("terser-webpack-plugin");
@@ -699,6 +699,6 @@ module.exports = {
 };
 ```
 
-# 最后
+## 最后
 
 到这里，差不多就是 2021 年配置 webpack4 的体验了。相比之前，确实是不那么复杂了许多。但要摸清诸多的配置细节还是需要下不少功夫。秉着好记性不如烂笔头的原则，给 webpack4 一个简单的总结，也是给自己温习配置 webpack4 过程的一个总结。
