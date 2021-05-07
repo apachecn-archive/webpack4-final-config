@@ -2,6 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const svgToMiniDataURI = require("mini-svg-data-uri");
+
 const loaders = require("./loaders");
 
 const pro = process.env.NODE_ENV === "production";

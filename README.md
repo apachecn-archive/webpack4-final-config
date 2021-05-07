@@ -52,7 +52,7 @@ npm i webpack@4.x webpack-cli@3.x webpack-dev-server@3.x html-webpack-plugin@4.x
 ### 安装相关 loader
 
 ```
-npm i url-loader@4.x file-loader@6.x -D
+npm i url-loader@4.x file-loader@6.x mini-svg-data-uri@1.x -D
 ```
 
 ### webpack.common.js
@@ -61,6 +61,7 @@ npm i url-loader@4.x file-loader@6.x -D
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const svgToMiniDataURI = require("mini-svg-data-uri");
 
 module.exports = {
   // https://v4.webpack.docschina.org/configuration/mode/
