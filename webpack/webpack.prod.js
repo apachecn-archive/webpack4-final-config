@@ -25,6 +25,7 @@ module.exports = merge(config, {
        * all：把动态和非动态模块同时进行优化打包；所有模块都扔到 vendors.bundle.js 里面。
        * initial：把非动态模块打包进 vendor，动态模块优化打包
        * async：把动态模块打包进 vendor，非动态模块保持原样（不优化）
+       * stackoverflow上有篇解释：https://stackoverflow.com/questions/50127185/webpack-what-is-the-difference-between-all-and-initial-options-in-optimizat
        */
       chunks: "all",
       /**
@@ -45,20 +46,22 @@ module.exports = merge(config, {
         //   minChunks: 2,
         // },
         /**
+         * 将react和react-dom包，打包为：react-vendor.chunk.js
+         * reactVendor 和 vendor 的顺序如果颠倒一下，则打包的结构会导致没有react-vendor.js，也就是说范围大的正则，如：/[\\/]node_modules[\\/]/，要放到最后。
+         * 顺序的问题，在之前应该是个bug。在webpack@4.45.0这个版本修复了：https://github.com/webpack/webpack/releases/tag/v4.45.0
+         */
+        reactVendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: "react-vendor",
+          chunks: "all",
+        },
+        /**
          * 将node_modules中的包，打包为：vendors.chunk.js
          * https://v4.webpack.docschina.org/plugins/split-chunks-plugin/#split-chunks-example-2
          */
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          chunks: "all",
-        },
-        /**
-         * 将react和react-dom包，打包为：react-vendor.chunk.js
-         */
-        reactVendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "react-vendor",
           chunks: "all",
         },
       },

@@ -365,7 +365,9 @@ module.exports = {
 };
 ```
 
-## react 组件启用有状态刷新
+## [模块热替换](https://v4.webpack.docschina.org/guides/hot-module-replacement)
+
+### react 组件启用有状态刷新
 
 有状态刷新在开发模式下可提高效率
 
@@ -411,6 +413,15 @@ module.exports = {
   ],
 };
 ```
+
+### 其他代码和框架
+
+社区还提供许多其他 loader 和示例，可以使 HMR 与各种框架和库平滑地进行交互……
+
+- [React Hot Loader](https://github.com/gaearon/react-hot-loader)：实时调整 react 组件。 现已被 react-refresh 替代
+- [Vue Loader](https://github.com/vuejs/vue-loader)：此 loader 支持 vue 组件的 HMR，提供开箱即用体验。
+- [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader)：支持 Elm 编程语言的 HMR。
+- [Angular HMR](https://github.com/PatrickJS/angular-hmr)：没有必要使用 loader！直接修改 NgModule 主文件就够了，它可以完全控制 HMR API。
 
 ## 处理样式
 
@@ -680,20 +691,21 @@ module.exports = {
         //   minChunks: 2,
         // },
         /**
+         * 将react和react-dom包，打包为：react-vendor.chunk.js
+         * reactVendor 和 vendor 的顺序如果颠倒一下，则打包的结构会导致没有react-vendor.js
+         */
+        reactVendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: "react-vendor",
+          chunks: "all",
+        },
+        /**
          * 将node_modules中的包，打包为：vendors.chunk.js
          * https://v4.webpack.docschina.org/plugins/split-chunks-plugin/#split-chunks-example-2
          */
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          chunks: "all",
-        },
-        /**
-         * 将react和react-dom包，打包为：react-vendor.chunk.js
-         */
-        reactVendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: "react-vendor",
           chunks: "all",
         },
       },

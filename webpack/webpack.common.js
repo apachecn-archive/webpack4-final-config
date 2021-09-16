@@ -53,6 +53,7 @@ module.exports = {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
         use: [
+          "cache-loader",
           {
             loader: "babel-loader",
             options: {
